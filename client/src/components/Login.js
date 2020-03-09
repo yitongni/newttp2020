@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link, withRouter } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import styles from "../styles/Login.css";
 // import Footer from "./Footer";
 
@@ -32,40 +32,64 @@ class Login extends Component {
     this.setState({ hidden: !this.state.hidden });
   }
 
+  loginUser(){
+    console.log(this.state.password)
+
+    const data = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    let url = "http://localhost:5000/api/users/login";
+    axios
+      .get(url, data)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        const data = res.data;
+        // if (
+        //   this.state.email === data.email &&
+        //   this.state.password === data.password
+        // ) {
+        //   this.props.setUser(res.data);
+        //   this.props.history.push(`/home/${this.state.email}`);
+        //   this.setState({ redirect: true });
+        // } else {
+        //   alert("User does not exist or is wrong");
+        //   console.log("user not found");
+        // }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    //needs to check with backend
+    };
+
   onSubmit = event => {
     event.preventDefault();
-    // const data = this.state;
+    const data = this.state;
     console.log(this.state.email);
-    // let url = "http://localhost:5000/api/users/login";
-    // axios
-    //   .get(url, {
-    //     params: {
-    //       email: this.state.email
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //     const data = res.data;
-    //     if (
-    //       this.state.email === data.email &&
-    //       this.state.password === data.password
-    //     ) {
-    //       this.props.setUser(res.data);
-    //       this.props.history.push(`/home/${this.state.email}`);
-    //       this.setState({ redirect: true });
-    //     } else {
-    //       alert("User does not exist or is wrong");
-    //       console.log("user not found");
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    //needs to check with backend
+
+    let url = "http://localhost:5000/api/users/find";
+    axios
+      .get(url, {
+        params: {
+          email: this.state.email,
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        if(res.data.count!=0){
+          this.loginUser()
+        }
+        else{
+          alert("Wrong Username or Password");
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
-  //need to add the :id part
   render() {
     if (this.state.redirect) {
       return <Redirect to="/home" />;

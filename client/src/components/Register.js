@@ -43,55 +43,26 @@ class Register extends Component {
     this.setState({ hidden: !this.state.hidden });
   }
 
-  createUser(userAlreadyExist){
-    if(userAlreadyExist==false){
-      const data = {
-          name: this.state.name,
-        email: this.state.email,
-        password: this.state.password
-      };
-      let url = "http://localhost:5000/api/users/create";
-      axios
-        .post(url, data)
-        .then(res => {
-          console.log(res.data)
-          console.log("yes");
-          this.setState({ redirect: true });
-        })
-        .catch(error => {
-          console.log(error);
-          alert("User already exists.");
-        });
-    }
-  }
-
+  //Have to make sure user enters the same password
   onSubmit = async event => {
     event.preventDefault();
-    let userAlreadyExist;
 
-    let url = "http://localhost:5000/api/users/find";
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    }
+    let url = "http://localhost:5000/api/users/create";
     axios
-      .get(url, {
-        params: {
-          email: this.state.email,
-        }
-      })
+      .post(url, data)
       .then(res => {
         console.log(res.data)
-        if(res.data.count!=0){
-          userAlreadyExist=true;
-          alert("User already exists.");
-        }
-        else{
-          userAlreadyExist=false;
-          this.createUser(userAlreadyExist)
-        }
-        console.log(userAlreadyExist)
-        // console.log("yes");
-        // this.setState({ redirect: true });
+        alert("Account created");
+        this.setState({ redirect: true });
       })
       .catch(error => {
         console.log(error);
+        alert("User already exists.");
       });
   };
 
