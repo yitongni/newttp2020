@@ -32,54 +32,26 @@ class Login extends Component {
     this.setState({ hidden: !this.state.hidden });
   }
 
-  loginUser(){
-    console.log(this.state.password)
-
-    const data = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    let url = "http://localhost:5000/api/users/login";
-    axios
-      .get(url, data)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        const data = res.data;
-        // if (
-        //   this.state.email === data.email &&
-        //   this.state.password === data.password
-        // ) {
-        //   this.props.setUser(res.data);
-        //   this.props.history.push(`/home/${this.state.email}`);
-        //   this.setState({ redirect: true });
-        // } else {
-        //   alert("User does not exist or is wrong");
-        //   console.log("user not found");
-        // }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    //needs to check with backend
-    };
 
   onSubmit = event => {
     event.preventDefault();
-    const data = this.state;
+    const data = {
+      email: this.state.email,
+      password: this.state.password
+    }
     console.log(this.state.email);
+    console.log(data);
 
-    let url = "http://localhost:5000/api/users/find";
+    let url = "http://localhost:5000/api/users/login";
     axios
-      .get(url, {
-        params: {
-          email: this.state.email,
-        }
-      })
+      .get(url, {params:data})
       .then(res => {
         console.log(res.data)
-        if(res.data.count!=0){
-          this.loginUser()
+        if(res.data){
+          alert("Signing in");
+          // this.props.setUser(res.data);
+          this.props.history.push(`/home/${this.state.email}`);
+          this.setState({ redirect: true });
         }
         else{
           alert("Wrong Username or Password");

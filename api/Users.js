@@ -21,32 +21,28 @@ module.exports = router;
 // });
 
 router.get("/login", async (req, res, next) => {
-  const { email, password } = req.body;
-  console.log(req.query.email)
-  console.log(email)
-  console.log(password);
-  console.log("Hello")
+  const { email, password } = req.query;
+  try{ 
+    const userExist = await Users.findOne({
+      where: {
+        email
+      }
+    });
+    if(userExist){
+      bcrypt.compare(password, userExist.password, function(err, result) {
 
-
-  // Users.findOne({ email: email})
-  //   .then(user=>{
-  //     if(user){
-  //       console.log(user.password);
-  //       bcrypt.hash(req.body.password, salt, function (err, hash){ //hashes the password
-  //         console.log("Password" + hash);
-  //         bcrypt.compare(password, hash, function(err, res) {
-  //           if(res===true){
-  //             console.log("Hello" + user);
-  //             res.status(200).json(user);
-  //           }
-  //             // res === true
-  //         });
-  //       });
-  //     }
-  //   })
-  //     .catch(error => {
-  //       res.status(400).send(error);
-  //     });
+        if(result){
+          res.status(200).json(userExist);
+        }
+        else{
+          res.status(200).send(err);
+        }
+      });
+    }
+  }
+  catch (error) {
+    res.status(200).send(error);
+  }
 });
 
 // router.get("/find", async (req, res, next) => {
@@ -97,7 +93,7 @@ router.post("/create", async (req, res, next) => {
               password: hash
           });
         } 
-        catch (err0r) {
+        catch (error) {
           res.status(400).send(error);
           console.error(error);
         }
