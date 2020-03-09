@@ -23,13 +23,7 @@ class Home extends Component {
       
     return (
       <div>
-        <Link
-            className="nav-link"
-            to={`/portfolio/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Portfolio
-        </Link>
+        <h1>Portfolio</h1>
       </div>
     );
   }
