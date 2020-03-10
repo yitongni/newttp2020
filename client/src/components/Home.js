@@ -30,6 +30,13 @@ class Home extends Component {
         >
             Portfolio
         </Link>
+        <Link
+            className="nav-link"
+            to={`/transaction/${this.state.email}`}
+            style={{ textAlign: "center" }}
+        >
+            Transaction
+        </Link>
       </div>
     );
   }
