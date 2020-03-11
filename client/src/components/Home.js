@@ -37,6 +37,13 @@ class Home extends Component {
         >
             Transaction
         </Link>
+        <Link
+            className="nav-link"
+            to={`/makepurchases/${this.state.email}`}
+            style={{ textAlign: "center" }}
+        >
+            Purchase
+        </Link>
       </div>
     );
   }

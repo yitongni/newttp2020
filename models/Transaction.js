@@ -2,7 +2,7 @@ const db = require("./db");
 const Sequelize = require("sequelize");
 
 const Transaction = db.define(
-  "transactions",
+  "transaction",
   {
     transactionid: {
       type: Sequelize.INTEGER,
@@ -32,7 +32,8 @@ const Transaction = db.define(
     },
     dateofpurchase: {
         type: Sequelize.DATEONLY,
-        allowNull: false
+        allowNull: true, 
+        defaultValue:  Sequelize.NOW
     },
     email: {
       type: Sequelize.TEXT,
@@ -43,7 +44,7 @@ const Transaction = db.define(
     }
   },
   {
-    tableName: "transactions",
+    tableName: "transaction",
     timestamps: false
   }
 );

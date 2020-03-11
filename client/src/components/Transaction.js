@@ -45,6 +45,27 @@ class Transaction extends Component {
   render() {
     return (
       <div>
+        <Link
+            className="nav-link"
+            to={`/portfolio/${this.state.email}`}
+            style={{ textAlign: "center" }}
+        >
+            Portfolio
+        </Link>
+        <Link
+            className="nav-link"
+            to={`/transaction/${this.state.email}`}
+            style={{ textAlign: "center" }}
+        >
+            Transaction
+        </Link>
+        <Link
+            className="nav-link"
+            to={`/makepurchases/${this.state.email}`}
+            style={{ textAlign: "center" }}
+        >
+            Purchase
+        </Link>
         <h1>Transaction</h1>
         <h1>{this.state.name}</h1>
         <h1>Your current balance: {this.state.balance}</h1>
