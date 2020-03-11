@@ -31,7 +31,7 @@ const Transaction = db.define(
       }
     },
     dateofpurchase: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
     email: {
@@ -48,10 +48,4 @@ const Transaction = db.define(
   }
 );
 
-/***/
-// Transaction.belongsTo(User, {as: 'user'});
-// User.hasMany(Transaction, {as: 'Transaction'});
-/***/
-
-// export Transaction modules
 module.exports = Transaction;

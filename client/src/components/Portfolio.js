@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
+import e from "cors";
+import Modal from "./Modal.js"
+import MakeStockPurchase from "./MakeStockPurchase.js"
 
 class Home extends Component {
     state = {
@@ -8,13 +11,23 @@ class Home extends Component {
         name: "",
         balance: "",
         search: "",
-        stocks: []
+        stocks: [],
+        quantity: ""
     };
 
     onChangeSearch = event => {
       this.setState({ search: event.target.value }, ()=>{
         console.log(this.state.search)
       })
+    };
+
+    refresh = () => {
+    
+    };
+
+    inputHandler = e => {
+      e.preventDefault();
+      this.setState({ [e.target.name]: e.target.value });
     };
 
     async getStock(search) {
@@ -52,6 +65,11 @@ class Home extends Component {
           })
   }
 
+  // inputHandler = e => {
+  //   e.preventDefault();
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
+
     onSubmit = event => {
       event.preventDefault();
       this.getStock(this.state.search).then(data => {
@@ -85,14 +103,56 @@ class Home extends Component {
           });
     }
 
-    buystock(quantiy){ 
-      console.log(quantiy)
-    }
-    componentDidMount() {
-        this.getUserInfo()
-    }
+    // buyStock(symbol, price, email){ 
+      
+    //     return(
+    //       <div>
+    //         <MakeStockPurchase
+    //           symbol={symbol}
+    //           costpershare={price}
+    //           email={email}
+    //         />
+    //       </div>
+    //     )
+    // }
 
   render() {
+
+    // let addForm = (
+    //   <div>
+    //     <form
+    //       className="col-md-4 mb-3"
+    //       style={{
+    //         marginLeft: "auto",
+    //         marginRight: "auto",
+    //         marginTop: "2%"
+    //       }}
+    //       // onSubmit={this.buystock(this.state.quantity)}
+    //     >
+    //       <div className="form-group">
+    //         <label style={{ fontWeight: "bold" }}>
+    //           Quantity
+    //         </label>
+    //         <input
+    //         id="quantity"
+    //           type="text"
+    //           className="form-control form-control-lg"
+    //           name="quantity"
+    //           pattern="[0-9]*"
+    //           onChange={this.inputHandler}
+    //         />
+    //       </div>
+    //       <div className="form-group">
+    //         <input
+    //           type="submit"
+    //           value="Buy"
+    //           className="btn btn-primary"
+    //           style={{ backgroundColor: "#91b0ff" }}
+    //         />
+    //       </div>
+    //     </form>
+    //   </div>
+    // );
 
     
     let records = this.state.stocks.map(stock => {
@@ -101,18 +161,21 @@ class Home extends Component {
           <td>{stock.stockname}</td>
           <td>{stock.price}</td>
           <td>
-              <input
-                type="text"
-                refs="quantiy"
-                placeholder="Quantity"
-              />
-          </td>
-          <td>
-            <button
-              onClick={() => this.buystock(this.refs.quantiy.value)}>
+          <MakeStockPurchase
+              symbol={stock.stockname}
+              costpershare={stock.price}
+              email={this.state.email}
+            />
+            {/* <button onClick={this.buyStock(stock.stockname, stock.price, this.state.email )}>
               Buy Stock
-            </button>
+            </button> */}
           </td>
+          {/* <Modal
+                form={addForm}
+                label={"Buy Stock"}
+                title={`Buy ${stock.stockname}`}
+                refresh={this.refresh}
+          /> */}
         </tr>
       );
     })
