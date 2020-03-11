@@ -23,3 +23,47 @@ router.post("/add", async (req, res, next) => {
       console.error(err);
     }
 });
+
+router.get("/getPortfolio", async (req, res, next) => {
+  console.log("Hello")
+  const { email } = req.query;
+  // console.log(req.body);
+  
+    Transaction.findAll({ 
+      attributes: [
+        "symbol",
+        // "costpershare",
+        [Sequelize.fn("sum", Sequelize.col("quantityofshares")), "total"]
+      ],
+      where: {
+        email: req.query.email,
+      },
+      group: ["symbol"]
+    })
+    .then(data => {
+      console.log(data)
+      res.status(200).json(data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
+router.get("/getTransaction", async (req, res, next) => {
+  console.log("Hello")
+  const { email } = req.query;
+  // console.log(req.body);
+  
+    Transaction.findAll({ 
+      where: {
+        email: req.query.email,
+      },
+    })
+    .then(data => {
+      console.log(data)
+      res.status(200).json(data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
