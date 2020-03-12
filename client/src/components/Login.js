@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/Login.css";
-// import Footer from "./Footer";
 
 class Login extends Component {
   constructor() {
@@ -49,7 +48,6 @@ class Login extends Component {
         console.log(res.data)
         if(res.data){
           alert("Signing in");
-          // this.props.setUser(res.data);
           this.props.history.push(`/portfolio/${this.state.email}`);
           this.setState({ redirect: true });
         }
@@ -69,25 +67,11 @@ class Login extends Component {
 
     return (
       <div>
-        <div id="loginform">
-          <div
-            className="container login-container"
-            style={{ marginTop: "2%", marginBottom: "5%" }}
-          >
-            <form onSubmit={this.onSubmit}>
-              <h3
-                style={{
-                  textAlign: "center",
-                  marginBottom: "5%",
-                  fontSize: "50px"
-                }}
-              >
-                Log In
-              </h3>
+        <div class="logincontainer">
+          <form onSubmit={this.onSubmit}>
+            <h3>Log In</h3>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="email1">
-                  Email:
-                </label>
+                <label for="email1">Email</label>
                 <input
                   className="form-control"
                   type="text"
@@ -98,9 +82,7 @@ class Login extends Component {
                 />
               </div>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="pw">
-                  Password:
-                </label>
+                <label for="pw">Password:</label>
                 <input
                   className="form-control"
                   type={this.state.hidden ? "password" : "text"}
@@ -119,15 +101,10 @@ class Login extends Component {
                   style={{ backgroundColor: "#1e1e6e" }}
                 />
               </div>
-              <Link
-                className="nav-link"
-                to={`/register`}
-                style={{ textAlign: "center" }}
-              >
+              <Link class="register-login-link" to={`/register`}>
                 Register
               </Link>
             </form>
-          </div>
         </div>
       </div>
     );
@@ -135,11 +112,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-/* 
-*** Email validation check, omitted for now
-<input className="form-control" type= "email" required id= "email1" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}" value= {this.state.email} onChange= {this.onChangeEmail} />
-
-*** Password validation check, omitted for now
-<input className="form-control" type= {this.state.hidden ? "password": "text"} required id= "pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value= {this.state.password} onChange= {this.onChangePass} />
-*/

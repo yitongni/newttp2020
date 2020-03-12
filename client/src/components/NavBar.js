@@ -7,26 +7,25 @@ class NavBar extends Component {
     const email = this.props.match.params.email;
     console.log(email);
     return (
-      <div id="nav-container">
-        <nav className="nav">
+      <div class="nav-container">
+        <nav class="nav">
           <Link
             className="nav-link"
             to={`/portfolio/${email}`}>
             Portfolio
           </Link>
-
+          
           <Link
             className="nav-link"
-            to={`/transaction/${email}`}
-          >
+            to={`/transaction/${email}`}>
             Transaction
           </Link>
+          
           <Link
             className="nav-link"
             to={`/makepurchases/${email}`}>
             Purchase
           </Link>
-            
         </nav>
       </div>
     );

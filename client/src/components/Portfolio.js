@@ -106,8 +106,8 @@ class Portfolio extends Component {
         <NavBar/>
         <h1 class="title">Portfolio</h1>
         <h1 class="balance">Current balance: ${this.state.balance}</h1>
-        <table class="datatable">
-          <thead class="thead-light">
+        <table class="mytable">
+          <thead class="thead">
             <tr>
               <th>Symbol</th>
               <th>Shares</th>

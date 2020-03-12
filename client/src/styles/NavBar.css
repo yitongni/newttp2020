@@ -1,9 +1,6 @@
-#nav-container {
+.nav-container {
     width: 100%;
-    float: right;
     background-color: #ffffff;
-    top: 0;
-    z-index: 1;
     padding-top: 10px;
     padding-bottom: 10px;
 }

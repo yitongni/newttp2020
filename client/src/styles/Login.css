@@ -1,0 +1,28 @@
+h3{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    margin-bottom: 5%;
+    font-size: "50px";
+    font-family: "Courier New", monospace;
+}
+
+
+label{
+    font-family: "Courier New", monospace;
+    font-weight: bold
+}
+
+.logincontainer{
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.register-login-link{
+    text-align: center;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    color: #000000
+}

@@ -73,28 +73,11 @@ class Register extends Component {
 
     return (
       <div>
-        <div className = "titleName" style={{paddingTop:"70px"}}>
-          
-        </div>
-        <div id="loginform">
-          <div
-            className="container login-container"
-            style={{ marginTop: "2%", marginBottom: "5%" }}
-          >
+          <div class="logincontainer">
             <form onSubmit={this.onSubmit}>
-              <h3
-                style={{
-                  textAlign: "center",
-                  marginBottom: "5%",
-                  fontSize: "50px"
-                }}
-              >
-                Register
-              </h3>
+              <h3>Register</h3>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="pw2">
-                  Name:
-                </label>
+                <label name="pw2">Name</label>
                 <input
                   className="form-control"
                   type="text"
@@ -105,9 +88,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="email1">
-                  Email:
-                </label>
+                <label for="email1">Email</label>
                 <input
                   className="form-control"
                   type="text"
@@ -118,9 +99,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="pw">
-                  Password:
-                </label>
+                <label for="pw">Password</label>
                 <input
                   className="form-control"
                   type={this.state.hidden ? "password" : "text"}
@@ -131,9 +110,7 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label style={{ fontWeight: "bold" }} for="pw2">
-                  Re-enter Password:
-                </label>
+                <label for="pw2">Re-enter Password</label>
                 <input
                   className="form-control"
                   type={this.state.hidden ? "password" : "text"}
@@ -151,14 +128,10 @@ class Register extends Component {
                   style={{ backgroundColor: "#1e1e6e" }}
                 />
               </div>
-              <Link
-                className="nav-link"
-                to={`/`}
-                style={{ textAlign: "center" }}>
+              <Link class="register-login-link" to={`/`}>
                 Login
               </Link>
             </form>
-          </div>
         </div>
       </div>
     );
@@ -166,11 +139,3 @@ class Register extends Component {
 }
 
 export default Register;
-
-/* 
-*** Email validation check, omitted for now
-<input className="form-control" type= "email" required id= "email1" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}" value= {this.state.email} onChange= {this.onChangeEmail} />
-*** Password validation check, omitted for now
-<input className="form-control" type= {this.state.hidden ? "password": "text"} required id= "pw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value= {this.state.password} onChange= {this.onChangePass} />
-<small className="form-text text-white">Password has to contain a <b>lowercase</b> letter, <b>uppercase</b> letter, a <b>number</b>, and it must be a <b>minimum of 8 characters</b></small>
-*/

@@ -10,30 +10,20 @@ var salt = bcrypt.genSaltSync(10);
 //make sure to export the router
 module.exports = router;
 
-// router.get("/", async (req, res, next) => {
-//   Users.findAll({ limit: 200 })
-//     .then(userResponse => {
-//       res.status(200).json(userResponse);
-//     })
-//     .catch(error => {
-//       res.status(400).send(error);
-//     });
-// });
-
 router.get("/login", async (req, res, next) => {
   const { email, password } = req.query;
-  //Check if valid email was entered
+  //Check if an account with email exist
   try{ 
     const userExist = await Users.findOne({
       where: {
         email
       }
     });
-    if(userExist){
+    if(userExist){ //If account does exist
       //Compare password user entered with password in database
       bcrypt.compare(password, userExist.password, function(err, result) {
 
-        if(result){
+        if(result){ //If passwords match
           res.status(200).json(userExist);
         }
         else{
@@ -47,6 +37,7 @@ router.get("/login", async (req, res, next) => {
   }
 });
 
+//Find user info based of email
 router.get("/find", async (req, res, next) => {
   console.log(req.query.email)
   const {email} = req.query;
@@ -65,6 +56,7 @@ router.get("/find", async (req, res, next) => {
   }
 });
 
+//Creates user
 router.post("/create", async (req, res, next) => {
   const { name, email } = req.body;
   console.log(req.body);
@@ -108,9 +100,9 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+//Update users balance after they made a purchase
 router.put("/updateBalance", async (req, res, next) => {
   const { email, balance } = req.body;
-  //console.log(req.body);
   Users.findOne({
     where: { email: email }
   })

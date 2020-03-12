@@ -1,9 +1,13 @@
+h1{
+    text-align: center;
+}
+
 .title,
 .balance {
     font-family: "Courier New", monospace;
 }
   
-.datatable {
+.mytable {
     font-family: "Courier New", monospace;
     border-collapse: collapse;
     width: 100%;
@@ -11,14 +15,14 @@
     width: "100vw"
 }
   
-.datatable td,
-#datatable th {
+.mytable td,
+#mytable th {
     border: 2px solid #ddd;
     padding: 8px;
     text-align: center;
 }
 
-.datatable th {
+.mytable th {
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 5px;

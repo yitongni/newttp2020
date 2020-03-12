@@ -21,20 +21,20 @@ class Makepurchases extends Component {
         const token="Tpk_c81be31f1ba942bda5076850b4e33cb4"
   
         let url=`https://sandbox.iexapis.com/stable/search/${search}?token=${token}`
+        
         //Get Stocks with name user entered
-        let stock = await axios
-            .get(url)
+        let stock = await axios.get(url)
             .then(stock => stock.data)
             .catch(error => {
                 console.log(error);
             });
             console.log(stock)
   
-          let stockSymbol = stock.map(stock => stock.symbol)
-          console.log(stockSymbol);
+        let stocksymbol = stock.map(stock => stock.symbol)
+          console.log(stocksymbol);
   
-            //Gets the price of each stock
-          let url2=`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${stockSymbol}&types=price&token=${token}`
+          //Gets the price of each stock
+          let url2=`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${stocksymbol}&types=price&token=${token}`
           let price = await axios
             .get(url2)
             .then(data => data.data)
@@ -42,9 +42,9 @@ class Makepurchases extends Component {
                 console.log(error);
             });
             console.log(price)
-            let stocksnameandprice = stock.map(stock => {
-              return {stockname: stock.symbol, price: price[stock.symbol].price}
-            })
+          let stocksnameandprice = stock.map(stock => {
+            return {stockname: stock.symbol, price: price[stock.symbol].price}
+          })
   
           console.log(stocksnameandprice)
             this.setState({ stocks: stocksnameandprice}, ()=>{
@@ -63,18 +63,13 @@ class Makepurchases extends Component {
         this.setState({ [e.target.name]: e.target.value });
       };
     
-    // inputHandler = e => {
-    //   e.preventDefault();
-    //   this.setState({ [e.target.name]: e.target.value });
-    // };
-  
+
       onSubmit = event => {
         event.preventDefault();
-        this.getStock(this.state.search).then(data => {
-        });
+        this.getStock(this.state.search)
       };
 
-    getUserInfo(){
+      getUserInfo(){
         const data={
             email: this.state.email
         }
@@ -107,13 +102,12 @@ class Makepurchases extends Component {
         this.getUserInfo()
     }
 
-    buyStock(symbol, price){ 
+    async buyStock(symbol, price){ 
         if(price*this.state.amountofshares>this.state.balance){
           console.log("You dont have enough money")
           alert("You dont have enough balance")
         }
         else{
-          console.log("Hello")
           const data = {
             symbol: symbol, 
               quantityofshares: this.state.amountofshares, 
@@ -121,14 +115,16 @@ class Makepurchases extends Component {
               email: this.state.email
           }
           let addPurchaseUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/add";
-          axios.post(addPurchaseUrl, data)
-            .then(res => {})
+           await axios.post(addPurchaseUrl, data)
+            .then(res => {
+              console.log(res)
+            })
             .catch(error => {
               console.log(error);
             });
           
           let updateBalanceUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/users/updateBalance";
-            axios.put(updateBalanceUrl, {
+          await axios.put(updateBalanceUrl, {
               balance: this.state.balance-price*this.state.amountofshares,
               email: this.state.email
             })
@@ -171,35 +167,30 @@ class Makepurchases extends Component {
 
     return (
       <div>
-         <div>
-           <NavBar/>
-        </div>
-        <div>
+        <NavBar/>
         <h1 class="title">Purchase</h1>
         <h1 class="balance">Current balance: ${this.state.balance}</h1>
-        </div>
         <form onSubmit={this.onSubmit}>
-              <input
-                type="text"
-                placeholder="Look for a stock"
-                required
-                name="search"
-                onChange={this.onChangeSearch}
-              />
-              <button>Search</button>
-            </form>
-            <table class="datatable">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Price per share</th>
-                    <th>Quantity</th>
-                    <th>Buy stock</th>
-                  </tr>
-                </thead>
-                <tbody>{records}</tbody>
-              </table>
-            
+          <input
+            type="text"
+            placeholder="Look for a stock"
+            required
+            name="search"
+            onChange={this.onChangeSearch}
+          />
+          <button>Search</button>
+        </form>
+        <table class="mytable">
+          <thead class="thead">
+            <tr>
+              <th>Symbol</th>
+              <th>Price per share</th>
+              <th>Quantity</th>
+              <th>Buy stock</th>
+            </tr>
+          </thead>
+          <tbody>{records}</tbody>
+        </table>    
       </div>
     );
   }
