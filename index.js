@@ -30,5 +30,5 @@ db.authenticate()
     console.error("Unable to connect to the database!:", err);
   });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`app is listening on ${port}`));
