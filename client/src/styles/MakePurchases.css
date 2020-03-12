@@ -1,0 +1,13 @@
+.inputForm{
+    width:600px; 
+    margin-left:auto;
+    margin-right:auto;
+    padding-bottom: 15px;
+}
+
+.input-input, 
+.inputbutton{
+    width:100%; 
+    margin-left:auto;
+    margin-right:auto;
+}

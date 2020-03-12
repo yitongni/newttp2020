@@ -170,15 +170,16 @@ class Makepurchases extends Component {
         <NavBar/>
         <h1 class="title">Purchase</h1>
         <h1 class="balance">Current balance: ${this.state.balance}</h1>
-        <form onSubmit={this.onSubmit}>
+        <form class="inputForm" onSubmit={this.onSubmit}>
           <input
+            class="input-input"
             type="text"
             placeholder="Look for a stock"
             required
             name="search"
             onChange={this.onChangeSearch}
           />
-          <button>Search</button>
+          <button class="inputbutton">Search</button>
         </form>
         <table class="mytable">
           <thead class="thead">
