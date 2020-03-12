@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import NavBar from "./NavBar.js"
 import axios from "axios";
+import styles from "../styles/Transaction.css"
 
 class Transaction extends Component {
     state = {
@@ -47,8 +48,7 @@ class Transaction extends Component {
         }
 
         let getPortfolioUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/getTransaction";
-      axios
-          .get(getPortfolioUrl, {params:data})
+      axios.get(getPortfolioUrl, {params:data})
           .then(res => {
             this.setState({ transaction: res.data}, () => {
               console.log(this.state.transaction);
@@ -70,23 +70,23 @@ class Transaction extends Component {
         </tr>
       );
     })
+
     return (
       <div>
         <NavBar/>
-        <h1 class="title">Transaction</h1>
+        <h1 class="title">Transactions</h1>
         <h1 class="balance">Current balance: ${this.state.balance}</h1>
-        <table class="datatable">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Amount of shares</th>
-                    <th>Price per share</th>
-                    <th>Date of purchase</th>
-                  </tr>
-                </thead>
-                <tbody>{myTransaction}</tbody>
-              </table>
-        
+        <table class="mytable">
+          <thead class="thead">
+            <tr>
+              <th>Symbol</th>
+              <th>Amount of shares</th>
+              <th>Price per share</th>
+              <th>Date of purchase</th>
+            </tr>
+          </thead>
+          <tbody>{myTransaction}</tbody>
+        </table>
       </div>
     );
   }

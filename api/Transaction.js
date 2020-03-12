@@ -6,8 +6,8 @@ const Op = Sequelize.Op;
 
 module.exports = router;
 
+//Add a transaction
 router.post("/add", async (req, res, next) => {
-    console.log("hello")
     const { symbol, quantityofshares, costpershare, dateofpurchase, email } = req.body;
     console.log(req.body);
   
@@ -15,21 +15,19 @@ router.post("/add", async (req, res, next) => {
       const created = await Transaction.create({ 
             symbol, quantityofshares, costpershare, dateofpurchase, email 
         });
-      
-      res.status(201).send({
-        // symbol, quantityofshares, costpershare, dateofpurchase, email 
-      });
-    } catch (err) {
+      res.status(201).send({});
+    } 
+    catch (err) {
       console.error(err);
     }
 });
 
+//Get users portfolio
 router.get("/getPortfolio", async (req, res, next) => {
   console.log("Hello")
   const { email } = req.query;
-  // console.log(req.body);
-  
     Transaction.findAll({ 
+      //Gets the symbol as well as the sum of the shares an user own for that symbol
       attributes: [
         "symbol",
         [Sequelize.fn("sum", Sequelize.col("quantityofshares")), "total"]
@@ -38,7 +36,6 @@ router.get("/getPortfolio", async (req, res, next) => {
         email: req.query.email,
       },
       group: ["symbol"]
-      
     })
     .then(data => {
       console.log(data)
@@ -49,37 +46,9 @@ router.get("/getPortfolio", async (req, res, next) => {
     });
 });
 
-// router.get("/getLatestPrice", async (req, res, next) => {
-//   console.log("Getting latest Price")
-//   const { email } = req.query;
-//   // console.log(req.body);
-  
-//     Transaction.findAll({ 
-
-//       attributes: [
-//         "symbol",
-//         "costpershare",
-//       ],
-//       where: {
-//         email: req.query.email,
-//       },
-//       order: [ [ 'createdat', 'DESC' ]],
-  
-//     })
-//     .then(data => {
-//       console.log(data)
-//       res.status(200).json(data);
-//     })
-//     .catch(error => {
-//       res.status(400).send(error);
-//     });
-// });
-
+//Get all of a users transaction
 router.get("/getTransaction", async (req, res, next) => {
-  console.log("Hello")
   const { email } = req.query;
-  // console.log(req.body);
-  
     Transaction.findAll({ 
       where: {
         email: req.query.email,
