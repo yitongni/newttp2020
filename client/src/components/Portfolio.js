@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
+import styles from "../styles/Portfolio.css"
 import e from "cors";
 import { Button } from "react-bootstrap";
 
@@ -9,7 +10,8 @@ class Portfolio extends Component {
         email: this.props.match.params.email,
         name: "",
         balance: "",
-        portfolio: []
+        portfolio: [],
+        prices: []
     };
 
     componentDidMount(){
@@ -23,7 +25,7 @@ class Portfolio extends Component {
           .then(res => {
             console.log(res.data)
             if(res.data){
-            this.setState({ balance: res.data.balance, }, () => {
+            this.setState({ balance: parseFloat(res.data.balance).toFixed(2), }, () => {
                 console.log(this.state.balance);
             });
             this.setState({ name: res.data.name, }, () => {
@@ -50,16 +52,29 @@ class Portfolio extends Component {
       .catch(error => {
         console.log(error);
       });
+
+      let getLatestPriceUrl = "http://localhost:5000/api/transaction/getLatestPrice";
+      axios
+          .get(getLatestPriceUrl, {params:data})
+          .then(res => {
+            console.log(res)
+            this.setState({ prices: res.data}, () => {
+              console.log(this.state.prices);
+            });
+          })
+      .catch(error => {
+        console.log(error);
+      });
     }
 
 
-  render() {
+  render() {  
     let myStocks = this.state.portfolio.map(stock => {
       return (
         <tr key={stock.symbol}>
           <td>{stock.symbol}</td>
           <td>{stock.total} Shares</td>
-          <td>{stock.costpershare}</td>
+          {/* <td>{stock.costpershare}</td> */}
         </tr>
       );
     })
@@ -89,10 +104,26 @@ class Portfolio extends Component {
             Purchase
         </Link>
       </div>
-        <h1>Portfolio</h1>
-        <h1>{this.state.name}</h1>
-        <h1>Your current balance: {this.state.balance}</h1>
-        {myStocks}
+        <h1 class="title">Portfolio</h1>
+        {/* <h1>{this.state.name}</h1> */}
+        <h1 classname="balance">Current balance: ${this.state.balance}</h1>
+        <table
+                className="datatable"
+                style={{
+                  width: "85vw",
+                  boxShadow: "4px 4px 5px grey"
+                }}
+              >
+                <thead className="thead-light">
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>{myStocks}</tbody>
+              </table>
+        
       </div>
     );
   }

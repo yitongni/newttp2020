@@ -1,0 +1,46 @@
+.title {
+    color: #33D9FF;
+    font-family: "Andale Mono", monospace;
+}
+
+.grid-container {
+    width: 100vw;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+.myfont {
+    font-family: "Ubuntu", sans-serif;
+}
+  
+.datatable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 50px;
+}
+  
+.datatable td,
+#datatable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+/* .datatable tr:nth-child(even) {
+    background-color: #dbe5ff;
+}
+  
+.datatable tr:hover {
+    background-color: #ddd;
+}
+   */
+.datatable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 5px;
+    text-align: left;
+    background-color: #1e1e6e;
+    color: white;
+}

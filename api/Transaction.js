@@ -32,13 +32,39 @@ router.get("/getPortfolio", async (req, res, next) => {
     Transaction.findAll({ 
       attributes: [
         "symbol",
-        // "costpershare",
         [Sequelize.fn("sum", Sequelize.col("quantityofshares")), "total"]
       ],
       where: {
         email: req.query.email,
       },
       group: ["symbol"]
+      
+    })
+    .then(data => {
+      console.log(data)
+      res.status(200).json(data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
+});
+
+router.get("/getLatestPrice", async (req, res, next) => {
+  console.log("Getting latest Price")
+  const { email } = req.query;
+  // console.log(req.body);
+  
+    Transaction.findAll({ 
+
+      attributes: [
+        "symbol",
+        "costpershare",
+      ],
+      where: {
+        email: req.query.email,
+      },
+      order: [ [ 'createdat', 'DESC' ]],
+  
     })
     .then(data => {
       console.log(data)

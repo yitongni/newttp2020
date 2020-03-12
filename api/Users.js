@@ -107,3 +107,24 @@ router.post("/create", async (req, res, next) => {
     res.status(400).send(error);
   }
 });
+
+router.put("/updateBalance", async (req, res, next) => {
+  const { email, balance } = req.body;
+  //console.log(req.body);
+  Users.findOne({
+    where: { email: email }
+  })
+    .then(user => {
+      console.log(user);
+      user.update({
+          balance: balance
+        })
+        .then(() => {
+          console.log("Updated successfully");
+        });
+    })
+    .catch(error => {
+      res.send(error);
+      console.log(error);
+    });
+});

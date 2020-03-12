@@ -50,7 +50,7 @@ class Login extends Component {
         if(res.data){
           alert("Signing in");
           // this.props.setUser(res.data);
-          this.props.history.push(`/home/${this.state.email}`);
+          this.props.history.push(`/portfolio/${this.state.email}`);
           this.setState({ redirect: true });
         }
         else{
@@ -64,7 +64,7 @@ class Login extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/portfolio"/>;
     }
 
     return (

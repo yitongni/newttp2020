@@ -12,7 +12,7 @@ class Makepurchases extends Component {
         balance: "",
         search: "",
         stocks: [],
-        quantity: ""
+        amountofshares: ""
     };
 
     async getStock(search) {
@@ -83,7 +83,7 @@ class Makepurchases extends Component {
           .then(res => {
             console.log(res.data)
             if(res.data){
-                this.setState({ balance: res.data.balance, }, () => {
+                this.setState({ balance: parseFloat(res.data.balance).toFixed(2), }, () => {
                     console.log(this.state.balance);
                 });
                 this.setState({ name: res.data.name, }, () => {
@@ -106,19 +106,38 @@ class Makepurchases extends Component {
     }
 
     buyStock(symbol, price){ 
-        console.log("Hello")
-        const data = {
-          symbol: symbol, 
-            quantityofshares: 2, 
-            costpershare: price,
-            email: this.state.email
+        if(price*this.state.amountofshares>this.state.balance){
+          console.log("You dont have enough money")
+          alert("You dont have enough balance")
         }
-        let addPurchaseUrl = "http://localhost:5000/api/transaction/add";
-        axios.post(addPurchaseUrl, data)
-          .then(res => {})
-          .catch(error => {
-            console.log(error);
-          });
+        else{
+          console.log("Hello")
+          const data = {
+            symbol: symbol, 
+              quantityofshares: this.state.amountofshares, 
+              costpershare: price,
+              email: this.state.email
+          }
+          let addPurchaseUrl = "http://localhost:5000/api/transaction/add";
+          axios.post(addPurchaseUrl, data)
+            .then(res => {})
+            .catch(error => {
+              console.log(error);
+            });
+          
+          let updateBalanceUrl = "http://localhost:5000/api/users/updateBalance";
+            axios.put(updateBalanceUrl, {
+              balance: this.state.balance-price*this.state.amountofshares,
+              email: this.state.email
+            })
+            .then(res => {
+              console.log(res)
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          
+        }
       }
 
   render() {
@@ -126,7 +145,18 @@ class Makepurchases extends Component {
         return (
           <tr key={stock.stockname}>
             <td>{stock.stockname}</td>
-            <td>{stock.price}</td>
+            <td>${stock.price}</td>
+            <td>
+              <form>
+                <input
+                  type="text"
+                  pattern="[0-9]*"
+                  placeholder="Amount of shares"
+                  name="amountofshares"
+                  onChange={this.inputHandler}
+                />
+              </form>
+            </td>
             <td>
               <Button onClick={() => {this.buyStock(stock.stockname, stock.price)}}>
                 Buy Stock

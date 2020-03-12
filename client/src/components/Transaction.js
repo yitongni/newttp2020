@@ -21,7 +21,7 @@ class Transaction extends Component {
           .then(res => {
             console.log(res.data)
             if(res.data){
-                this.setState({ balance: res.data.balance, }, () => {
+                this.setState({ balance: parseFloat(res.data.balance).toFixed(2), }, () => {
                     console.log(this.state.balance);
                 });
                 this.setState({ name: res.data.name, }, () => {

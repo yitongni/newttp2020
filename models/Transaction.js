@@ -35,6 +35,16 @@ const Transaction = db.define(
         allowNull: true, 
         defaultValue:  Sequelize.NOW
     },
+    createdAt: {
+      field: 'createdat',
+      type: 'TIMESTAMP',
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      field: 'updatedat',
+      type: 'TIMESTAMP',
+      type: Sequelize.DATE,
+    },
     email: {
       type: Sequelize.TEXT,
       allowNull: false,
@@ -45,7 +55,7 @@ const Transaction = db.define(
   },
   {
     tableName: "transaction",
-    timestamps: false
+    timestamps: true
   }
 );
 
