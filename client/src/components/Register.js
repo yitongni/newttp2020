@@ -52,7 +52,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password
     }
-    let url = "http://localhost:5000/api/users/create";
+    let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/create";
     axios
       .post(url, data)
       .then(res => {

@@ -42,7 +42,7 @@ class Login extends Component {
     console.log(this.state.email);
     console.log(data);
 
-    let url = "http://localhost:5000/api/users/login";
+    let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/login";
     axios
       .get(url, {params:data})
       .then(res => {

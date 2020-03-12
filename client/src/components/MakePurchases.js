@@ -79,7 +79,7 @@ class Makepurchases extends Component {
             email: this.state.email
         }
     
-        let url = "http://localhost:5000/api/users/find";
+        let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/find";
         axios
           .get(url, {params:data})
           .then(res => {
@@ -120,14 +120,14 @@ class Makepurchases extends Component {
               costpershare: price,
               email: this.state.email
           }
-          let addPurchaseUrl = "http://localhost:5000/api/transaction/add";
+          let addPurchaseUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/add";
           axios.post(addPurchaseUrl, data)
             .then(res => {})
             .catch(error => {
               console.log(error);
             });
           
-          let updateBalanceUrl = "http://localhost:5000/api/users/updateBalance";
+          let updateBalanceUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/users/updateBalance";
             axios.put(updateBalanceUrl, {
               balance: this.state.balance-price*this.state.amountofshares,
               email: this.state.email
