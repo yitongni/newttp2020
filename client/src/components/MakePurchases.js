@@ -157,7 +157,7 @@ class Makepurchases extends Component {
               </form>
             </td>
             <td>
-              <Button onClick={() => {this.buyStock(stock.stockname, stock.price)}}>
+              <Button class="purchaseButton" onClick={() => {this.buyStock(stock.stockname, stock.price)}}>
                 Buy Stock
               </Button>
             </td>

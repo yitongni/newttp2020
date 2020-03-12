@@ -95,10 +95,9 @@ class Login extends Component {
 
               <div className="form-group text-center">
                 <input
-                  className="btn btn-primary btn-lg #1e1e6e"
+                  class="loginButton"
                   type="submit"
                   value="Log In"
-                  style={{ backgroundColor: "#1e1e6e" }}
                 />
               </div>
               <Link class="register-login-link" to={`/register`}>

@@ -25,3 +25,11 @@ label{
     font-weight: bold;
     color: #000000
 }
+
+.registerButton{
+    background-color: #6A71C6;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    text-align: center;
+    color: white 
+}

@@ -122,10 +122,9 @@ class Register extends Component {
               </div>
               <div className="form-group text-center">
                 <input
-                  className="btn btn-primary btn-lg #1e1e6e"
+                  class="registerButton"
                   type="submit"
                   value="Register"
-                  style={{ backgroundColor: "#1e1e6e" }}
                 />
               </div>
               <Link class="register-login-link" to={`/`}>
