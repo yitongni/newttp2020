@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 // middleware that should allow open access for requests to routes
 
-app.use(express.static(path.join(__dirname, "frontend", "build")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 //Database stuff
 app.use("/api", require("./api"));
