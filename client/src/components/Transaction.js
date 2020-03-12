@@ -66,6 +66,7 @@ class Transaction extends Component {
           <td>{stock.symbol}</td>
           <td>{stock.quantityofshares}</td>
           <td>${parseFloat(stock.costpershare).toFixed(2)}</td>
+          <td>${parseFloat(stock.costpershare*stock.quantityofshares).toFixed(2)}</td>
           <td>{stock.dateofpurchase}</td>
         </tr>
       );
@@ -82,6 +83,7 @@ class Transaction extends Component {
               <th>Symbol</th>
               <th>Amount of shares</th>
               <th>Price per share</th>
+              <th>Total price</th>
               <th>Date of purchase</th>
             </tr>
           </thead>
