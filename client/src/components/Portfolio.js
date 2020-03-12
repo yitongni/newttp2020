@@ -70,8 +70,8 @@ class Portfolio extends Component {
                         return (
                           <tr key={stock.symbol}>
                             <td>{stock.symbol}</td>
-                            <td>{stock.total} Shares</td>
-                            <td>{this.state.prices[stock.symbol].price*stock.total}</td>
+                            <td>{stock.total}</td>
+                            <td>${(this.state.prices[stock.symbol].price*stock.total).toFixed(2)}</td>
                           </tr>
                         );
                         
@@ -121,15 +121,8 @@ class Portfolio extends Component {
         </Link>
       </div>
         <h1 class="title">Portfolio</h1>
-        {/* <h1>{this.state.name}</h1> */}
         <h1 classname="balance">Current balance: ${this.state.balance}</h1>
-        <table
-                className="datatable"
-                style={{
-                  width: "85vw",
-                  boxShadow: "4px 4px 5px grey"
-                }}
-              >
+        <table className="datatable">
                 <thead className="thead-light">
                   <tr>
                     <th>Symbol</th>

@@ -16,15 +16,16 @@
 }
   
 .datatable {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Courier New", monospace;
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 50px;
+    width: "100vw"
 }
   
 .datatable td,
 #datatable th {
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     padding: 8px;
 }
   

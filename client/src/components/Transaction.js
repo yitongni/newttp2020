@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
+import NavBar from "./NavBar.js"
 import axios from "axios";
 
 class Transaction extends Component {
@@ -64,7 +65,7 @@ class Transaction extends Component {
         <tr key={stock.symbol}>
           <td>{stock.symbol}</td>
           <td>{stock.quantityofshares}</td>
-          <td>${stock.costpershare}</td>
+          <td>${parseFloat(stock.costpershare).toFixed(2)}</td>
           <td>{stock.dateofpurchase}</td>
         </tr>
       );
@@ -94,19 +95,13 @@ class Transaction extends Component {
         </Link>
         <h1>Transaction</h1>
         <h1>Current balance: {this.state.balance}</h1>
-        <table
-                className="datatable"
-                style={{
-                  width: "85vw",
-                  boxShadow: "4px 4px 5px grey"
-                }}
-              >
+        <table className="datatable">
                 <thead className="thead-light">
                   <tr>
                     <th>Symbol</th>
                     <th>Amount of shares</th>
                     <th>Price per share</th>
-                    <th>Date of urchase</th>
+                    <th>Date of purchase</th>
                   </tr>
                 </thead>
                 <tbody>{myTransaction}</tbody>

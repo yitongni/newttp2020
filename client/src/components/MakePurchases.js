@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
+import NavBar from "./NavBar.js"
+import styles from "../styles/MakePurchases.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 
 
@@ -145,10 +147,11 @@ class Makepurchases extends Component {
         return (
           <tr key={stock.stockname}>
             <td>{stock.stockname}</td>
-            <td>${stock.price}</td>
+            <td>${parseFloat(stock.price).toFixed(2)}</td>
             <td>
               <form>
                 <input
+                  className="form-control"
                   type="text"
                   pattern="[0-9]*"
                   placeholder="Amount of shares"
@@ -168,7 +171,9 @@ class Makepurchases extends Component {
 
     return (
       <div>
-        <Link
+         <div>
+           <NavBar/>
+        {/* <Link
             className="nav-link"
             to={`/portfolio/${this.state.email}`}
             style={{ textAlign: "center" }}
@@ -188,9 +193,12 @@ class Makepurchases extends Component {
             style={{ textAlign: "center" }}
         >
             Purchase
-        </Link>
+        </Link> */}
+        </div>
+        <div>
         <h1>Purchase</h1>
-        <h1>Your current balance: {this.state.balance}</h1>
+        <h1>Current balance: ${this.state.balance}</h1>
+        </div>
         <form onSubmit={this.onSubmit}>
               <input
                 type="text"
@@ -201,7 +209,18 @@ class Makepurchases extends Component {
               />
               <button>Search</button>
             </form>
-            {records}
+            <table className="datatable">
+                <thead className="thead-light">
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Price per share</th>
+                    <th>Quantity</th>
+                    <th>Buy stock</th>
+                  </tr>
+                </thead>
+                <tbody>{records}</tbody>
+              </table>
+            
       </div>
     );
   }
