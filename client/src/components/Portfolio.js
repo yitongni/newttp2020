@@ -11,9 +11,13 @@ class Portfolio extends Component {
         name: "",
         balance: "",
         portfolio: [],
-        prices: []
+        prices: [],
+        stocksymbols: [],
+        mystocks: []
     };
+    async getPortfolio(){
 
+    }
     componentDidMount(){
       const data={
         email: this.state.email
@@ -48,36 +52,48 @@ class Portfolio extends Component {
             this.setState({ portfolio: res.data}, () => {
               console.log(this.state.portfolio);
             });
+            let symbols=res.data.map(symbol=>{
+              return symbol.symbol
+            })
+            // console.log(symbols)
+            this.setState({ stocksymbols: symbols}, () => {
+              console.log(this.state.stocksymbols);
+            });
+            const token="Tpk_c81be31f1ba942bda5076850b4e33cb4"
+              let getLatestPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price&token=${token}`;
+                 axios
+                  .get(getLatestPriceUrl)
+                  .then(res => {
+                    this.setState({ prices: res.data}, () => {
+                      console.log(this.state.prices);
+                      let myStocks = this.state.portfolio.map(stock => {
+                        return (
+                          <tr key={stock.symbol}>
+                            <td>{stock.symbol}</td>
+                            <td>{stock.total} Shares</td>
+                            <td>{this.state.prices[stock.symbol].price*stock.total}</td>
+                          </tr>
+                        );
+                        
+                      })
+                      this.setState({ myStocks: myStocks}, () => {
+                        console.log(this.state.myStocks);
+                      })
+                    });
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
           })
       .catch(error => {
         console.log(error);
       });
 
-      let getLatestPriceUrl = "http://localhost:5000/api/transaction/getLatestPrice";
-      axios
-          .get(getLatestPriceUrl, {params:data})
-          .then(res => {
-            console.log(res)
-            this.setState({ prices: res.data}, () => {
-              console.log(this.state.prices);
-            });
-          })
-      .catch(error => {
-        console.log(error);
-      });
+      
     }
 
 
-  render() {  
-    let myStocks = this.state.portfolio.map(stock => {
-      return (
-        <tr key={stock.symbol}>
-          <td>{stock.symbol}</td>
-          <td>{stock.total} Shares</td>
-          {/* <td>{stock.costpershare}</td> */}
-        </tr>
-      );
-    })
+  render() { 
 
     return (
       <div>
@@ -121,7 +137,7 @@ class Portfolio extends Component {
                     <th>Price</th>
                   </tr>
                 </thead>
-                <tbody>{myStocks}</tbody>
+                <tbody>{this.state.myStocks}</tbody>
               </table>
         
       </div>

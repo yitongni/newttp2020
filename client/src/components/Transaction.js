@@ -63,8 +63,8 @@ class Transaction extends Component {
       return (
         <tr key={stock.symbol}>
           <td>{stock.symbol}</td>
-          <td>{stock.quantityofshares} Shares</td>
-          <td>{stock.costpershare} Per share</td>
+          <td>{stock.quantityofshares}</td>
+          <td>${stock.costpershare}</td>
           <td>{stock.dateofpurchase}</td>
         </tr>
       );
@@ -93,9 +93,25 @@ class Transaction extends Component {
             Purchase
         </Link>
         <h1>Transaction</h1>
-        <h1>{this.state.name}</h1>
-        <h1>Your current balance: {this.state.balance}</h1>
-        {myTransaction}
+        <h1>Current balance: {this.state.balance}</h1>
+        <table
+                className="datatable"
+                style={{
+                  width: "85vw",
+                  boxShadow: "4px 4px 5px grey"
+                }}
+              >
+                <thead className="thead-light">
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Amount of shares</th>
+                    <th>Price per share</th>
+                    <th>Date of urchase</th>
+                  </tr>
+                </thead>
+                <tbody>{myTransaction}</tbody>
+              </table>
+        
       </div>
     );
   }
