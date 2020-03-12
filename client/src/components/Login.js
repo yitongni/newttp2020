@@ -69,10 +69,6 @@ class Login extends Component {
 
     return (
       <div>
-        <div className = "titleName" style={{paddingTop:"70px"}}>
-          <span>Health Tracker</span>
-          
-        </div>
         <div id="loginform">
           <div
             className="container login-container"

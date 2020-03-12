@@ -173,27 +173,6 @@ class Makepurchases extends Component {
       <div>
          <div>
            <NavBar/>
-        {/* <Link
-            className="nav-link"
-            to={`/portfolio/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Portfolio
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/transaction/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Transaction
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/makepurchases/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Purchase
-        </Link> */}
         </div>
         <div>
         <h1 class="title">Purchase</h1>

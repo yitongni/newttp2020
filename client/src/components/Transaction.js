@@ -73,27 +73,6 @@ class Transaction extends Component {
     return (
       <div>
         <NavBar/>
-        {/* <Link
-            className="nav-link"
-            to={`/portfolio/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Portfolio
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/transaction/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Transaction
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/makepurchases/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Purchase
-        </Link> */}
         <h1 class="title">Transaction</h1>
         <h1 class="balance">Current balance: ${this.state.balance}</h1>
         <table class="datatable">

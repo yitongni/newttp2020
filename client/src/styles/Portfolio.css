@@ -2,14 +2,6 @@
 .balance {
     font-family: "Courier New", monospace;
 }
-
-.grid-container {
-    width: 100vw;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    text-align: center;
-}
   
 .datatable {
     font-family: "Courier New", monospace;
@@ -31,6 +23,6 @@
     padding-bottom: 12px;
     padding-left: 5px;
     text-align: center;
-    background-color: #474345;
+    background-color: #2E2B2C;
     color: white;
 }

@@ -16,10 +16,8 @@ class Portfolio extends Component {
         stocksymbols: [],
         mystocks: []
     };
-    async getPortfolio(){
-
-    }
-    componentDidMount(){
+    
+    async componentDidMount(){
       const data={
         email: this.state.email
       }
@@ -61,36 +59,33 @@ class Portfolio extends Component {
               console.log(this.state.stocksymbols);
             });
             const token="Tpk_c81be31f1ba942bda5076850b4e33cb4"
-              let getLatestPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price&token=${token}`;
+              let getLatestPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price,quote&token=${token}`;
                  axios
                   .get(getLatestPriceUrl)
                   .then(res => {
                     this.setState({ prices: res.data}, () => {
                       console.log(this.state.prices);
+                      
+                
+                      
                       let myStocks = this.state.portfolio.map(stock => {
                         return (
                           <tr key={stock.symbol}>
                             <td>{stock.symbol}</td>
                             <td>{stock.total}</td>
-                            <td>${(this.state.prices[stock.symbol].price).toFixed(2)}</td>
+                            <td style={{
+                                color: this.state.prices[stock.symbol].price<this.state.prices[stock.symbol].quote.previousClose? "red"
+                                : this.state.prices[stock.symbol].price > this.state.prices[stock.symbol].quote.previousClose
+                                ? "green"
+                                : "grey"
+                            }}>${(this.state.prices[stock.symbol].price).toFixed(2)}</td>
                             <td>${(this.state.prices[stock.symbol].price*stock.total).toFixed(2)}</td>
                           </tr>
-                        );
-                        
+                        );  
                       })
                       this.setState({ myStocks: myStocks}, () => {
                         console.log(this.state.myStocks);
                       })
-                      let getOpenPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}/ohlc&token=${token}`;
-                      axios
-                        .get(getOpenPriceUrl)
-                        .then(res => {
-                          console.log(res)
-                        })
-                        .catch(error => {
-                          console.log(error);
-                        });
-            
                     });
                   })
                   .catch(error => {
