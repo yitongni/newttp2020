@@ -75,9 +75,7 @@ class Portfolio extends Component {
                             <td>{stock.total}</td>
                             <td style={{
                                 color: this.state.prices[stock.symbol].price<this.state.prices[stock.symbol].quote.previousClose? "red"
-                                : this.state.prices[stock.symbol].price > this.state.prices[stock.symbol].quote.previousClose
-                                ? "green"
-                                : "grey"
+                                : this.state.prices[stock.symbol].price > this.state.prices[stock.symbol].quote.previousClose? "green": "grey"
                             }}>${(this.state.prices[stock.symbol].price).toFixed(2)}</td>
                             <td>${(this.state.prices[stock.symbol].price*stock.total).toFixed(2)}</td>
                           </tr>
