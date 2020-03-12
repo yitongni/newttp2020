@@ -196,8 +196,8 @@ class Makepurchases extends Component {
         </Link> */}
         </div>
         <div>
-        <h1>Purchase</h1>
-        <h1>Current balance: ${this.state.balance}</h1>
+        <h1 class="title">Purchase</h1>
+        <h1 class="balance">Current balance: ${this.state.balance}</h1>
         </div>
         <form onSubmit={this.onSubmit}>
               <input
@@ -209,8 +209,8 @@ class Makepurchases extends Component {
               />
               <button>Search</button>
             </form>
-            <table className="datatable">
-                <thead className="thead-light">
+            <table class="datatable">
+                <thead class="thead-light">
                   <tr>
                     <th>Symbol</th>
                     <th>Price per share</th>

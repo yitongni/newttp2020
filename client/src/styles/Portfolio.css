@@ -1,6 +1,6 @@
-.title {
-    color: #33D9FF;
-    font-family: "Andale Mono", monospace;
+.title,
+.balance {
+    font-family: "Courier New", monospace;
 }
 
 .grid-container {
@@ -9,10 +9,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
     text-align: center;
-  }
-  
-.myfont {
-    font-family: "Ubuntu", sans-serif;
 }
   
 .datatable {
@@ -27,21 +23,14 @@
 #datatable th {
     border: 2px solid #ddd;
     padding: 8px;
+    text-align: center;
 }
-  
-/* .datatable tr:nth-child(even) {
-    background-color: #dbe5ff;
-}
-  
-.datatable tr:hover {
-    background-color: #ddd;
-}
-   */
+
 .datatable th {
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 5px;
-    text-align: left;
-    background-color: #1e1e6e;
+    text-align: center;
+    background-color: #474345;
     color: white;
 }

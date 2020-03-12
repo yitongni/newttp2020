@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-// import styles from "../Styling/navbar.css";
+import styles from "../styles/NavBar.css";
 
 class NavBar extends Component {
   render() {
@@ -9,29 +9,23 @@ class NavBar extends Component {
     return (
       <div id="nav-container">
         <nav className="nav">
-            <Link
+          <Link
             className="nav-link"
-            to={`/portfolio/${email}`}
-            style={{ textAlign: "center" }}
-        >
+            to={`/portfolio/${email}`}>
             Portfolio
-                </Link>
-           
-            <Link
+          </Link>
+
+          <Link
             className="nav-link"
             to={`/transaction/${email}`}
-            style={{ textAlign: "center" }}
-        >
+          >
             Transaction
-        </Link>
-            
-            <Link
+          </Link>
+          <Link
             className="nav-link"
-            to={`/makepurchases/${email}`}
-            style={{ textAlign: "center" }}
-        >
+            to={`/makepurchases/${email}`}>
             Purchase
-        </Link>
+          </Link>
             
         </nav>
       </div>

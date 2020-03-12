@@ -72,7 +72,8 @@ class Transaction extends Component {
     })
     return (
       <div>
-        <Link
+        <NavBar/>
+        {/* <Link
             className="nav-link"
             to={`/portfolio/${this.state.email}`}
             style={{ textAlign: "center" }}
@@ -92,11 +93,11 @@ class Transaction extends Component {
             style={{ textAlign: "center" }}
         >
             Purchase
-        </Link>
-        <h1>Transaction</h1>
-        <h1>Current balance: {this.state.balance}</h1>
-        <table className="datatable">
-                <thead className="thead-light">
+        </Link> */}
+        <h1 class="title">Transaction</h1>
+        <h1 class="balance">Current balance: ${this.state.balance}</h1>
+        <table class="datatable">
+                <thead class="thead-light">
                   <tr>
                     <th>Symbol</th>
                     <th>Amount of shares</th>

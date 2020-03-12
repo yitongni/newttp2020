@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/Portfolio.css"
+import NavBar from "./NavBar.js"
 import e from "cors";
 import { Button } from "react-bootstrap";
 
@@ -71,6 +72,7 @@ class Portfolio extends Component {
                           <tr key={stock.symbol}>
                             <td>{stock.symbol}</td>
                             <td>{stock.total}</td>
+                            <td>${(this.state.prices[stock.symbol].price).toFixed(2)}</td>
                             <td>${(this.state.prices[stock.symbol].price*stock.total).toFixed(2)}</td>
                           </tr>
                         );
@@ -79,6 +81,16 @@ class Portfolio extends Component {
                       this.setState({ myStocks: myStocks}, () => {
                         console.log(this.state.myStocks);
                       })
+                      let getOpenPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}/ohlc&token=${token}`;
+                      axios
+                        .get(getOpenPriceUrl)
+                        .then(res => {
+                          console.log(res)
+                        })
+                        .catch(error => {
+                          console.log(error);
+                        });
+            
                     });
                   })
                   .catch(error => {
@@ -94,45 +106,22 @@ class Portfolio extends Component {
 
 
   render() { 
-
     return (
       <div>
-        <div>
-        <Link
-            className="nav-link"
-            to={`/portfolio/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Portfolio
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/transaction/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Transaction
-        </Link>
-        <Link
-            className="nav-link"
-            to={`/makepurchases/${this.state.email}`}
-            style={{ textAlign: "center" }}
-        >
-            Purchase
-        </Link>
-      </div>
+        <NavBar/>
         <h1 class="title">Portfolio</h1>
-        <h1 classname="balance">Current balance: ${this.state.balance}</h1>
-        <table className="datatable">
-                <thead className="thead-light">
-                  <tr>
-                    <th>Symbol</th>
-                    <th>Shares</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>{this.state.myStocks}</tbody>
-              </table>
-        
+        <h1 class="balance">Current balance: ${this.state.balance}</h1>
+        <table class="datatable">
+          <thead class="thead-light">
+            <tr>
+              <th>Symbol</th>
+              <th>Shares</th>
+              <th>Price per share</th>
+              <th>Total price</th>
+            </tr>
+          </thead>
+          <tbody>{this.state.myStocks}</tbody>
+        </table>
       </div>
     );
   }
