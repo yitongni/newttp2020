@@ -74,6 +74,7 @@ class Makepurchases extends Component {
             email: this.state.email
         }
     
+        //Get user
         let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/find";
         axios
           .get(url, {params:data})
@@ -103,6 +104,7 @@ class Makepurchases extends Component {
     }
 
     async buyStock(symbol, price){ 
+      //Checks to make sure user has enough money
         if(price*this.state.amountofshares>this.state.balance){
           console.log("You dont have enough money")
           alert("You dont have enough balance")
@@ -114,6 +116,8 @@ class Makepurchases extends Component {
               costpershare: price,
               email: this.state.email
           }
+
+          //Add users purchase
           let addPurchaseUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/add";
            await axios.post(addPurchaseUrl, data)
             .then(res => {
@@ -123,6 +127,7 @@ class Makepurchases extends Component {
               console.log(error);
             });
           
+            //Update users balance
           let updateBalanceUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/users/updateBalance";
           await axios.put(updateBalanceUrl, {
               balance: this.state.balance-price*this.state.amountofshares,

@@ -16,7 +16,8 @@ class Transaction extends Component {
         const data={
             email: this.state.email
         }
-    
+
+    //Get users info
         let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/find";
         axios
           .get(url, {params:data})
@@ -47,6 +48,7 @@ class Transaction extends Component {
           email: this.state.email
         }
 
+        //Get users transaction
         let getPortfolioUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/getTransaction";
       axios.get(getPortfolioUrl, {params:data})
           .then(res => {

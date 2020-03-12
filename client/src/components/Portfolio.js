@@ -22,6 +22,7 @@ class Portfolio extends Component {
         email: this.state.email
       }
 
+        //Get user
       let url = "https://ttp2020-fullstack-app.herokuapp.com/api/users/find";
         axios
           .get(url, {params:data})
@@ -44,6 +45,7 @@ class Portfolio extends Component {
       });
 
 
+      //Gets users portfolio
       let getPortfolioUrl = "https://ttp2020-fullstack-app.herokuapp.com/api/transaction/getPortfolio";
       axios
           .get(getPortfolioUrl, {params:data})
@@ -59,6 +61,8 @@ class Portfolio extends Component {
               console.log(this.state.stocksymbols);
             });
             const token="Tpk_c81be31f1ba942bda5076850b4e33cb4"
+            
+            //Get the latest price for each symbol
               let getLatestPriceUrl = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price,quote&token=${token}`;
                  axios
                   .get(getLatestPriceUrl)
